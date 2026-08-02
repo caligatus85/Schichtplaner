@@ -595,20 +595,22 @@ function renderCalendar(){
     if(v){
       // Has shift entry
       const numColor=holiday?'#ff6b6b':v.color;
+      const shortName2=holiday?holiday.replace('Heilige Drei Könige','Hl.3Kön').replace('Tag der Deutschen Einheit','DE-Tag').replace('Christi Himmelfahrt','Himmelf.').replace('1. Weihnachtstag','Weihn.1').replace('2. Weihnachtstag','Weihn.2').replace('Tag der Arbeit','Maifeiertag').replace('Allerheiligen','Allerheil.'):'';
       cell.innerHTML=
         '<div class="cal-day-bg" style="background:'+v.color+';opacity:0.22"></div>'+
         '<div class="cal-day-num" style="color:'+numColor+'">'+d+'</div>'+
-        '<div class="cal-day-label" style="color:'+v.color+'">'+v.kuerzel+(hasCustom?'*':'')+'</div>'+
-        (holiday?'<div class="cal-day-holiday"></div>':'');
+        '<div class="cal-day-label" style="color:'+v.color+';font-size:6px;line-height:1.1">'+v.kuerzel+(hasCustom?'*':'')+'</div>'+
+        (holiday?'<div style="position:absolute;bottom:1px;left:0;right:0;text-align:center;font-size:5px;color:#ff6b6b;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 1px">'+shortName2+'</div>':'');
     } else {
       // No shift
       const numColor=holiday?'#ff6b6b':'var(--text2)';
-      const label=holiday?'FT':(sh&&sh.note?'·':'');
       const labelColor=holiday?'#ff6b6b':'';
+      // Shorten holiday name to fit in cell
+      const shortName=holiday?holiday.replace('Heilige Drei Könige','Hl.3Kön').replace('Tag der Deutschen Einheit','DE-Tag').replace('Christi Himmelfahrt','Himmelf.').replace('1. Weihnachtstag','Weihn.1').replace('2. Weihnachtstag','Weihn.2').replace('Tag der Arbeit','Maifeiertag').replace('Allerheiligen','Allerheil.'):'';
       cell.style.background='var(--bg2)';
       cell.innerHTML=
         '<div class="cal-day-num" style="color:'+numColor+'">'+d+'</div>'+
-        '<div class="cal-day-label" style="color:'+labelColor+'">'+label+'</div>';
+        '<div class="cal-day-label" style="color:'+labelColor+';font-size:6px;line-height:1.1;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;padding:0 1px">'+(holiday?shortName:(sh&&sh.note?'·':''))+'</div>';
     }
     if(holiday){
       cell.style.outline='1px solid rgba(255,107,107,0.7)';
