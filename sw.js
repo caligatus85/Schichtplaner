@@ -1,4 +1,4 @@
-const CACHE_NAME = 'schichtplaner-v1';
+const CACHE_NAME = 'schichtplaner-v3';
 const ASSETS = [
   './',
   './index.html',
